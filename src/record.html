@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <title>KAKEIBO</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/record.css" />
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css" >
+        <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+        <script type="text/javascript" src="./js/jquery.csv.js"></script>
+        <script type="text/javascript" src="./js/jquery.record.js"></script>
+        <script>
+            /*********************************/
+            /* スモールドロップダウンリスト更新 */
+            /*********************************/
+            function make_small_select(obj){
+                /* 初期化 */
+                var cate_large = new Array("食費","日用雑貨","交通","交際費","エンタメ","教育・教養","美容・衣服","医療・保険","通信","水道・光熱","住まい","クルマ","税金","大型出費","その他")
+                var cate_large_idx_0_list = new Array("食料品","カフェ","朝ごはん","昼ごはん","晩ごはん","間食","居酒屋","バー","その他")
+                var cate_large_idx_1_list = new Array("消耗品","子供関連","ペット関連","自転車関連","タバコ関連","その他")
+                var cate_large_idx_2_list = new Array("電車","タクシー","バス","飛行機","チャージ","その他")
+                var cate_large_idx_3_list = new Array("カフェ","朝ごはん","昼ごはん","晩ごはん","飲み会","プレゼント","カラオケ","ご祝儀・香典","お土産","ホテル","レジャー","タクシー","駐車場","懇親会","その他")
+                var cate_large_idx_4_list = new Array("温泉","レジャー","イベント","映画・動画","音楽","漫画","書籍","ゲーム","漫画喫茶","カラオケ","その他")
+                var cate_large_idx_5_list = new Array("奨学金","習い事","新聞","雑誌","文房具","参考書","受験料","学費","学資保険","塾","コピー","その他")
+                var cate_large_idx_6_list = new Array("洋服","アクセサリー・小物","下着","ジム・健康","お風呂","美容院","コスメ","エステ・ネイル","クリーニング","その他")
+                var cate_large_idx_7_list = new Array("国民年金保険料","厚生年金保険","健康保険","雇用保険","病院代","薬代","生命保険","医療保険","その他")
+                var cate_large_idx_8_list = new Array("携帯電話料金","固定電話料金","インターネット関連費","放送サービス料金","宅配便","切手・はがき","定額小為替","その他")
+                var cate_large_idx_9_list = new Array("水道料金","電気料金","ガス料金","灯油","その他")
+                var cate_large_idx_10_list = new Array("家賃","住宅ローン返済","家具","家電","リフォーム","住宅保険","その他")
+                var cate_large_idx_11_list = new Array("ガソリン","駐車場","自動車保険","自動車税","自動車ローン","免許教習","高速料金","レンタカー","その他")
+                var cate_large_idx_12_list = new Array("所得税","消費税","住民税","個人事業税","市民税","その他")
+                var cate_large_idx_13_list = new Array("旅行","住宅","自動車","バイク","結婚","出産","介護","その他")
+                var cate_large_idx_14_list = new Array("仕送り","お小遣い","使途不明金","立替金","現金の引出","カードの引落","スグル銀行","その他")
+                var select = document.getElementById("small_select");
+                
+                /* optionタグ削除 */
+                if (select.hasChildNodes()) {
+                    while (select.childNodes.length > 0) {
+                        select.removeChild(select.firstChild)
+                    }
+                }
+
+                /* リスト更新 */
+                if ($.inArray(obj, cate_large) != -1) {
+                    switch ($.inArray(obj, cate_large)) {
+                    case 0:
+                        for (var i in cate_large_idx_0_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_0_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 1:
+                        for (var i in cate_large_idx_1_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_1_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 2:
+                        for (var i in cate_large_idx_2_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_2_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 3:
+                        for (var i in cate_large_idx_3_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_3_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 4:
+                        for (var i in cate_large_idx_4_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_4_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 5:
+                        for (var i in cate_large_idx_5_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_5_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 6:
+                        for (var i in cate_large_idx_6_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_6_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 7:
+                        for (var i in cate_large_idx_7_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_7_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 8:
+                        for (var i in cate_large_idx_8_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_8_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 9:
+                        for (var i in cate_large_idx_9_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_9_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 10:
+                        for (var i in cate_large_idx_10_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_10_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 11:
+                        for (var i in cate_large_idx_11_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_11_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 12:
+                        for (var i in cate_large_idx_12_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_12_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 13:
+                        for (var i in cate_large_idx_13_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_13_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    case 14:
+                        for (var i in cate_large_idx_14_list) {
+                            var option = document.createElement("option");
+                            option.setAttribute("value", i);
+                            option.innerHTML = cate_large_idx_14_list[i];
+                            select.appendChild(option)
+                        }
+                    break;
+                    default:
+                        alert("switch in default.");
+                    break;
+                    }
+                }
+                return;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="wrap">
+            <header id="head">
+                <h1>kakeibo</h1>
+                <p>ver 1.0.0 for chrome</p>
+                <nav id="navi">
+                    <ul>
+                        <li><a href="./index.html">home</a></li>
+                        <li><a href="./record.html">record</a></li>
+                        <li><a href="./history.html">history</a></li>
+                        <li><a href="./analysis.html">analysis</a></li>
+                        <li><a href="./goal.html">goal</a></li>
+                        <li><a href="./setting.html">setting</a></li>
+                    </ul>
+                </nav>
+                <nav id="breadcrumbs">
+                    <ol>
+                        <li><a href="./">first</a> . </li>
+                        <li><a href="./">second</a> . </li>
+                        <li><a href="./">third</a></li>
+                    </ol>
+                </nav>
+            </header>
+
+            <section id="record">
+                <h2>record</h2>
+                <div id="input">
+                    <h3>input</h3>
+                    <table id="display" style="table-layout:fixed;">
+                        <tr id="yen">
+                            <td id="input_yen" colspan="4"></td>
+                        </tr>
+                        <tr id="keybord">
+                            <td bgcolor="#e6e6e6">num</td>
+                            <td bgcolor="#e6e6e6">/</td>
+                            <td bgcolor="#e6e6e6">*</td>
+                            <td bgcolor="#e6e6e6">back</td>
+                        </tr>
+                        <tr id="keybord">
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td bgcolor="#e6e6e6">-</td>
+                        </tr>
+                        <tr id="keybord">
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td bgcolor="#e6e6e6">+</td>
+                        </tr>
+                        <tr id="keybord">
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td bgcolor="#e6e6e6" rowspan="2">ent</td>
+                        </tr>
+                        <tr id="keybord">
+                            <td colspan="2">0</td>
+                            <td bgcolor="#e6e6e6">del</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="large" class="select">
+                    <h3>large</h3>
+                    <p id="large_cate_number"></p>
+                    <select name="large" id="large_select" onchange="make_small_select(this.options[this.options.selectedIndex].text)" required>
+                    </select>
+                    <button type=button>+</button>
+                </div>
+                <div id="small" class="select">
+                    <h3>small</h3>
+                    <p id="small_cate_number"></p>
+                    <select name="small"  id="small_select" required>
+                    </select>
+                    <button type=button>+</button>
+                </div>
+                <!-- <div id="shop" class="select">
+                    <h3>shop</h3>
+                    <p>12</p>
+                    <select name="shop" required>
+                        <option value="select1">-</option>
+                    </select>
+                    <button type=button>+</button>
+                </div> -->
+                <div id="date" class="select">
+                    <h3>date</h3>
+                    <p></p> <!-- null -->
+                    <input type="text" id="datepicker">
+                </div>
+                <div id="submit" class="select">
+                        <h3>submit</h3>
+                        <p></p> <!-- null -->
+                        <input type="submit" id="submit_btn">
+                    </div>
+                </section>
+
+            <section id="history">
+                <article class="post">
+                    <h2></h2>
+                    <p></p>
+                </article>
+                <article class="post">
+                    <h2></h2>
+                    <p></p>
+                </article>
+            </section>
+        </div>
+    </body>
+</html>
